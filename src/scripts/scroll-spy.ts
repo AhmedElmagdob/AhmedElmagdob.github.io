@@ -71,11 +71,19 @@ function initScrollSpy() {
   }
 
   function revealElement(el: Element) {
-    el.classList.add('visible');
-    const delay = el.getAttribute('data-reveal-delay');
-    if (delay) {
-      (el as HTMLElement).style.transitionDelay = `${delay}ms`;
+    const htmlEl = el as HTMLElement;
+    const delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+
+    if (delay > 0) {
+      htmlEl.style.transitionDelay = `${delay}ms`;
     }
+
+    htmlEl.classList.add('visible');
+
+    window.setTimeout(() => {
+      htmlEl.style.transitionDelay = '';
+      htmlEl.classList.add('revealed-done');
+    }, delay + 750);
   }
 
   function initReveal() {

@@ -174,11 +174,146 @@
   }
 
   .project-card {
-    @apply card overflow-hidden;
+    @apply rounded-2xl border p-0;
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
   }
 
-  .project-card:hover {
+  .project-card:hover,
+  .project-card:focus-within {
     @apply -translate-y-1;
+    border-color: rgba(56, 189, 248, 0.45);
+    box-shadow:
+      0 0 22px rgba(56, 189, 248, 0.2),
+      0 0 40px rgba(56, 189, 248, 0.08),
+      0 8px 28px rgba(15, 23, 42, 0.1);
+  }
+
+  .dark .project-card:hover,
+  .dark .project-card:focus-within {
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow:
+      0 0 28px var(--glow-cyan),
+      0 0 50px rgba(0, 240, 255, 0.22),
+      0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  .project-card--featured {
+    border-left: 3px solid var(--color-accent);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .dark .project-card--featured:hover,
+  .dark .project-card--featured:focus-within {
+    border-left-color: var(--neon-cyan);
+    box-shadow:
+      0 0 32px var(--glow-cyan),
+      0 0 58px rgba(0, 240, 255, 0.24),
+      0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  .project-card-media {
+    @apply relative flex shrink-0 items-center justify-center;
+    background: transparent;
+    border-color: var(--color-border);
+  }
+
+  .project-card:not(.project-card--featured) .project-card-media {
+    @apply rounded-t-2xl border-b py-7;
+  }
+
+  .project-card--featured .project-card-media {
+    @apply rounded-t-2xl border-b py-8 lg:w-64 lg:rounded-l-2xl lg:rounded-tr-none lg:border-b-0 lg:border-r lg:py-10 xl:w-72;
+  }
+
+  .project-card-icon {
+    @apply relative z-10 rounded-2xl border object-cover shadow-sm;
+    border-color: var(--color-border);
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease,
+      filter 0.15s ease;
+  }
+
+  .project-card--featured .project-card-icon {
+    @apply rounded-3xl shadow-md;
+  }
+
+  .project-card:hover .project-card-icon,
+  .project-card:focus-within .project-card-icon {
+    transform: scale(1.04);
+    border-color: rgba(56, 189, 248, 0.55);
+    filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+  }
+
+  .dark .project-card:hover .project-card-icon,
+  .dark .project-card:focus-within .project-card-icon {
+    border-color: rgba(0, 240, 255, 0.65);
+    filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.55));
+  }
+
+  .project-card-content {
+    @apply flex flex-1 flex-col;
+  }
+
+  .project-card--featured .project-card-content {
+    @apply justify-center p-6 sm:p-8;
+  }
+
+  .project-card:not(.project-card--featured) .project-card-content {
+    @apply p-5;
+  }
+
+  .project-card-actions {
+    @apply mt-auto flex flex-wrap gap-2 border-t pt-4;
+    border-color: var(--color-border);
+  }
+
+  .project-card:not(.project-card--featured) .project-card-actions {
+    @apply mt-4;
+  }
+
+  .project-card--featured .project-card-actions {
+    @apply mt-6 border-t-0 pt-0;
+  }
+
+  .project-card-actions .link-inline {
+    @apply rounded-lg border px-2.5 py-1.5 text-xs;
+    border-color: var(--color-border);
+    background: var(--color-surface-alt);
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .project-card-actions .link-inline:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-muted);
+    opacity: 1;
+  }
+
+  .dark .project-card-actions .link-inline:hover {
+    box-shadow: 0 0 12px var(--glow-cyan);
+  }
+
+  .project-card.reveal.visible.revealed-done {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .project-card.reveal:not(.revealed-done) {
+    transition:
+      transform 0.7s ease-out,
+      opacity 0.7s ease-out,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
   }
 
   .chip {
@@ -192,7 +327,10 @@
   }
 
   .reveal {
-    @apply translate-y-6 scale-[0.98] opacity-0 transition-all duration-700 ease-out;
+    @apply translate-y-6 scale-[0.98] opacity-0 ease-out;
+    transition:
+      transform 0.7s ease-out,
+      opacity 0.7s ease-out;
   }
 
   .reveal.visible {
@@ -200,7 +338,10 @@
   }
 
   .reveal-heading {
-    @apply translate-y-4 scale-95 opacity-0 transition-all duration-700 ease-out;
+    @apply translate-y-4 scale-95 opacity-0 ease-out;
+    transition:
+      transform 0.7s ease-out,
+      opacity 0.7s ease-out;
   }
 
   .reveal-heading.visible {

@@ -72,7 +72,7 @@ export const navItems: NavItem[] = [
 export const stats: Stat[] = [
   { value: '4+', label: 'Years Experience' },
   { value: '10+', label: 'Published Apps' },
-  { value: 'iOS · Android', label: 'Cross-Platform' },
+  { value: 'iOS · Android · Web', label: 'Cross-Platform' },
 ];
 
 export const about = {
@@ -297,7 +297,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Ahal | أهل',
-    image: '/images/nhrc.png',
+    image: '/images/ahal.png',
     description:
       'A community app for NHC residents to access housing services and submit maintenance requests.',
     tools: ['Flutter', 'Firebase', 'Push Notifications', 'Community Services'],
