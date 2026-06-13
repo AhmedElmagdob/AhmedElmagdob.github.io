@@ -20,12 +20,11 @@ function opensInNewTab(icon: string) {
 }
 ---
 
-<section id="contact" class="contact-section bg-grid relative overflow-hidden py-20 sm:py-28">
-  <div class="absolute inset-0 bg-[#0a0a0f] dark:bg-[#0a0a0f]" aria-hidden="true"></div>
-  <div class="section-container relative z-10">
+<section id="contact" class="contact-section section-alt bg-grid border-t py-20 sm:py-28">
+  <div class="section-container">
     <div class="reveal mb-16 text-center">
-      <h2 class="section-heading reveal-heading text-white dark:neon-text">Get in Touch</h2>
-      <p class="section-subheading mx-auto text-slate-400">
+      <h2 class="section-heading reveal-heading dark:neon-text">Get in Touch</h2>
+      <p class="section-subheading mx-auto">
         Have a project in mind? I'd love to hear from you.
       </p>
     </div>
@@ -38,25 +37,25 @@ function opensInNewTab(icon: string) {
       >
         <input type="hidden" name="_subject" value="Contact request from personal website" />
         <div>
-          <label for="email" class="mb-2 block text-sm font-medium text-slate-300">Email</label>
+          <label for="email" class="mb-2 block text-sm font-medium text-heading">Email</label>
           <input
             type="email"
             id="email"
             name="_replyto"
             placeholder="your@email.com"
             required
-            class="contact-input w-full rounded-xl border px-4 py-3 text-white placeholder-slate-500 transition-all duration-300 focus:outline-none focus:ring-1"
+            class="contact-input w-full rounded-xl border px-4 py-3 transition-all duration-300 focus:outline-none focus:ring-1"
           />
         </div>
         <div>
-          <label for="message" class="mb-2 block text-sm font-medium text-slate-300">Message</label>
+          <label for="message" class="mb-2 block text-sm font-medium text-heading">Message</label>
           <textarea
             id="message"
             name="message"
             rows="5"
             placeholder="Tell me about your project..."
             required
-            class="contact-input w-full resize-none rounded-xl border px-4 py-3 text-white placeholder-slate-500 transition-all duration-300 focus:outline-none focus:ring-1"
+            class="contact-input w-full resize-none rounded-xl border px-4 py-3 transition-all duration-300 focus:outline-none focus:ring-1"
           ></textarea>
         </div>
         <button type="submit" class="btn-primary w-full sm:w-auto">
@@ -68,7 +67,7 @@ function opensInNewTab(icon: string) {
       </form>
 
       <div class="reveal lg:col-span-2">
-        <h3 class="mb-6 text-lg font-semibold text-white">Connect with me</h3>
+        <h3 class="mb-6 text-lg font-semibold text-heading">Connect with me</h3>
         <div class="space-y-4">
           {
             socialLinks.map((link) => (
@@ -102,8 +101,8 @@ function opensInNewTab(icon: string) {
                   )}
                 </div>
                 <div>
-                  <div class="text-sm font-medium text-white">{link.label}</div>
-                  <div class="text-xs text-slate-400">{linkDetail(link)}</div>
+                  <div class="text-sm font-medium text-heading">{link.label}</div>
+                  <div class="text-xs text-muted">{linkDetail(link)}</div>
                 </div>
               </a>
             ))
@@ -115,23 +114,40 @@ function opensInNewTab(icon: string) {
 </section>
 
 <style>
+  .contact-section {
+    border-color: var(--color-border);
+  }
+
   .contact-input {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(18, 18, 26, 0.8);
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-heading);
+  }
+
+  .contact-input::placeholder {
+    color: var(--color-text-muted);
   }
 
   .contact-input:focus {
     border-color: var(--color-accent);
-    box-shadow: 0 0 15px var(--glow-cyan);
     --tw-ring-color: var(--color-accent);
   }
 
+  .dark .contact-input:focus {
+    box-shadow: 0 0 15px var(--glow-cyan);
+  }
+
   .contact-social {
-    border-color: rgba(255, 255, 255, 0.08);
-    background: rgba(18, 18, 26, 0.5);
+    border-color: var(--color-border);
+    background: var(--color-surface);
   }
 
   .contact-social:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  }
+
+  .dark .contact-social:hover {
     border-color: rgba(0, 240, 255, 0.3);
     box-shadow: 0 0 20px var(--glow-cyan);
   }
