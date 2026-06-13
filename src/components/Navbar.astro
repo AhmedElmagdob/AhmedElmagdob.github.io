@@ -1,0 +1,167 @@
+---
+import { navItems, site } from '../data/portfolio';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header
+  id="navbar"
+  class="on-hero fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300"
+>
+  <nav class="section-container flex h-16 items-center justify-between lg:h-20">
+    <a
+      href="#"
+      class="nav-brand text-lg font-bold transition-colors duration-300"
+      aria-label="Back to top"
+    >
+      {site.name.split(' ')[0]}
+    </a>
+
+    <ul class="hidden items-center gap-1 md:flex">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-nav-link={item.href.slice(1)}
+              class="nav-link rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-300"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="nav-menu-btn inline-flex items-center justify-center rounded-lg p-2 md:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="menu-icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="pointer-events-none fixed inset-0 top-16 z-40 opacity-0 transition-opacity duration-300 md:hidden"
+    aria-hidden="true"
+  >
+    <div id="mobile-menu-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm dark:bg-black/80"></div>
+    <ul class="relative flex flex-col gap-1 p-4">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-nav-link={item.href.slice(1)}
+              class="mobile-nav-link block rounded-xl px-4 py-3 text-lg font-medium transition-colors duration-300 hover:bg-black/5 dark:hover:bg-white/10"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<style>
+  #navbar.on-hero .nav-brand,
+  #navbar.on-hero .nav-link,
+  #navbar.on-hero .nav-menu-btn,
+  #navbar.on-hero .theme-toggle {
+    color: var(--color-text-heading);
+  }
+
+  #navbar.on-hero .nav-link {
+    color: var(--color-text-muted);
+  }
+
+  #navbar.on-hero .nav-link:hover {
+    color: var(--color-accent);
+  }
+
+  :global(.dark) #navbar.on-hero .nav-brand,
+  :global(.dark) #navbar.on-hero .nav-link,
+  :global(.dark) #navbar.on-hero .nav-menu-btn,
+  :global(.dark) #navbar.on-hero .theme-toggle {
+    @apply text-white;
+  }
+
+  :global(.dark) #navbar.on-hero .nav-link {
+    @apply text-slate-300 hover:text-white;
+  }
+
+  #navbar.scrolled {
+    @apply backdrop-blur-xl;
+    border-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  }
+
+  #navbar.scrolled .nav-brand {
+    color: var(--color-text-heading);
+  }
+
+  #navbar.scrolled .nav-link {
+    color: var(--color-text-muted);
+  }
+
+  #navbar.scrolled .nav-link:hover {
+    color: var(--color-accent);
+  }
+
+  #navbar.scrolled .nav-menu-btn,
+  #navbar.scrolled .theme-toggle {
+    color: var(--color-text-heading);
+  }
+
+  .nav-link,
+  .mobile-nav-link {
+    @apply relative;
+  }
+
+  .nav-link::after,
+  .mobile-nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full transition-all duration-300;
+    background: var(--color-accent);
+  }
+
+  .nav-link.active::after,
+  .mobile-nav-link.active::after {
+    @apply w-3/4;
+  }
+
+  .nav-link.active,
+  .mobile-nav-link.active {
+    color: var(--color-accent);
+  }
+
+  :global(.dark) .nav-link.active,
+  :global(.dark) .mobile-nav-link.active {
+    text-shadow: 0 0 10px var(--glow-cyan);
+  }
+
+  #mobile-menu.open {
+    @apply pointer-events-auto opacity-100;
+  }
+
+  #mobile-menu .mobile-nav-link {
+    color: var(--color-text-heading);
+  }
+
+  :global(.dark) #mobile-menu .mobile-nav-link {
+    @apply text-white;
+  }
+</style>

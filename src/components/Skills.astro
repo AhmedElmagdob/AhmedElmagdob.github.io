@@ -1,0 +1,48 @@
+---
+import { skillCategories } from '../data/portfolio';
+---
+
+<section id="skills" class="py-20 sm:py-28">
+  <div class="section-container">
+    <div class="reveal mb-16 text-center">
+      <h2 class="section-heading reveal-heading">Skills</h2>
+      <p class="section-subheading mx-auto">
+        Technologies and tools I use to build production-ready mobile apps.
+      </p>
+    </div>
+
+    <div class="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skillCategories.map((category, index) => (
+          <div class="reveal card" data-reveal-delay={index * 80}>
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">
+              {category.name}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <span class="chip">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('#skills .reveal-heading').forEach((el) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+  });
+</script>

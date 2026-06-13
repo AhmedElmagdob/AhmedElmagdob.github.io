@@ -1,0 +1,70 @@
+---
+import { education, languages } from '../data/portfolio';
+---
+
+<section id="education" class="py-20 sm:py-28">
+  <div class="section-container">
+    <div class="reveal mb-16 text-center">
+      <h2 class="section-heading reveal-heading">Education</h2>
+      <p class="section-subheading mx-auto">
+        Academic background and language proficiency.
+      </p>
+    </div>
+
+    <div class="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
+      <article class="reveal card">
+        <div class="mb-4 flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 class="text-xl font-semibold text-heading">{education.school}</h3>
+            <p class="mt-1 font-medium text-accent">{education.degree}</p>
+            <p class="mt-1 text-sm text-muted">{education.location}</p>
+          </div>
+          <time class="chip">{education.date}</time>
+        </div>
+        <ul class="space-y-2">
+          {
+            education.details.map((detail) => (
+              <li class="flex items-start gap-2 text-sm text-body">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {detail}
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+
+      <article class="reveal card">
+        <h3 class="mb-4 text-lg font-semibold text-heading">Languages</h3>
+        <ul class="space-y-3">
+          {
+            languages.map((lang) => (
+              <li class="flex items-center justify-between rounded-xl px-4 py-3 transition-all duration-300" style="background: var(--color-accent-muted)">
+                <span class="font-medium text-heading">{lang.name}</span>
+                <span class="chip">{lang.level}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('#education .reveal-heading').forEach((el) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+  });
+</script>

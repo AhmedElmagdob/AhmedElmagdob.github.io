@@ -1,0 +1,40 @@
+---
+import type { ProjectLink } from '../data/portfolio';
+
+interface Props {
+  link: ProjectLink;
+  variant?: 'button' | 'inline';
+}
+
+const { link, variant = 'inline' } = Astro.props;
+---
+
+{
+  variant === 'button' ? (
+    <a href={link.href} target="_blank" rel="noopener noreferrer" class="btn-outline">
+      {link.type === 'play' ? (
+        <img src="/images/google-play.png" alt="" class="h-5 w-5 object-contain" width="20" height="20" />
+      ) : link.type === 'appstore' ? (
+        <img src="/images/app-store.png" alt="" class="h-5 w-5 object-contain" width="20" height="20" />
+      ) : (
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+      )}
+      {link.label}
+    </a>
+  ) : (
+    <a href={link.href} target="_blank" rel="noopener noreferrer" class="link-inline">
+      {link.type === 'play' ? (
+        <img src="/images/google-play.png" alt="" class="h-4 w-4 object-contain" width="16" height="16" />
+      ) : link.type === 'appstore' ? (
+        <img src="/images/app-store.png" alt="" class="h-4 w-4 object-contain" width="16" height="16" />
+      ) : (
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      )}
+      {link.label}
+    </a>
+  )
+}

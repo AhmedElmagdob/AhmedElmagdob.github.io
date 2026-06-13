@@ -1,0 +1,57 @@
+---
+import { about } from '../data/portfolio';
+---
+
+<section id="about" class="py-20 sm:py-28">
+  <div class="section-container">
+    <div class="grid gap-12 lg:grid-cols-5 lg:gap-16">
+      <div class="reveal lg:col-span-2">
+        <h2 class="section-heading reveal-heading">About Me</h2>
+        <p class="section-subheading">
+          Building cross-platform mobile experiences that scale.
+        </p>
+      </div>
+
+      <div class="reveal space-y-6 lg:col-span-3">
+        <p class="text-lg leading-relaxed text-body">
+          {about.intro}
+        </p>
+        {
+          about.paragraphs.map((paragraph) => (
+            <p class="leading-relaxed text-body">{paragraph}</p>
+          ))
+        }
+
+        <ul class="grid gap-3 sm:grid-cols-3">
+          {
+            about.highlights.map((highlight, index) => (
+              <li class="highlight-card" data-reveal-delay={index * 80}>
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-medium text-heading">{highlight}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('#about .reveal-heading').forEach((el) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+  });
+</script>
